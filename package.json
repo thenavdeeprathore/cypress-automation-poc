@@ -4,7 +4,10 @@
   "description": "cypress automation poc",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:verify": "cypress verify",
+    "cy:open": "node_modules/.bin/cypress open",
+    "cy:run:electron:headless": "node_modules/.bin/cypress run",
+    "cy:run:electron:headed": "node_modules/.bin/cypress run --headed"
   },
   "author": "Navdeep Singh Rathore",
   "license": "ISC",
