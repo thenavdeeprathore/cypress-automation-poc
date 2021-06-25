@@ -1,0 +1,7 @@
+node_modules
+.vscode
+.idea
+mochawesome-report/*
+mochawesome-reporter/*
+cypress/videos/*
+debug.log
