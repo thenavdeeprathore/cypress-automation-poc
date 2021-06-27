@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "cy:verify": "cypress verify",
-    "cy:open": "node_modules/.bin/cypress open",
-    "cy:run:electron:headless": "node_modules/.bin/cypress run",
-    "cy:run:electron:headed": "node_modules/.bin/cypress run --headed"
+    "cy:open": "cypress open",
+    "cy:run:electron": "cypress run --headed",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run:electron:headless": "cypress run",
+    "cy:run:chrome:headless": "cypress run --browser chrome --headless",
+    "cy:run:firefox:headless": "cypress run --browser firefox --headless"
   },
   "author": "Navdeep Singh Rathore",
   "license": "ISC",
