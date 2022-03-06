@@ -28,5 +28,5 @@ jobs:
           command: npx cypress verify
       - run:
           name: "Run scripts"
-          command: npm cypress run
+          command: npm run cy:run:chrome
         
