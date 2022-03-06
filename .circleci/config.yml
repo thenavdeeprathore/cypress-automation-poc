@@ -17,7 +17,6 @@ jobs:
   build:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-    parallelism: 2
     steps:
       - checkout
       - run:
