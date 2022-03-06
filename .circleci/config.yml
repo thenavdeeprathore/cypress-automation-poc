@@ -15,6 +15,7 @@ version: 2
 #           browser: chrome
 jobs:
   build:
+    parallelism: 3
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     steps:
