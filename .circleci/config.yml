@@ -17,7 +17,7 @@ jobs:
   build:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-    parallelism: 3
+    parallelism: 2
     steps:
       - checkout
       - run:
@@ -25,8 +25,8 @@ jobs:
           command: npm ci
       - run:
           name: "Cypress Verify"
-          command: npx cypress verify
+          command: npm run cy:verify
       - run:
           name: "Run scripts"
-          command: npm run cy:run:chrome
+          command: npm run cy:run:firefox:headed
         
