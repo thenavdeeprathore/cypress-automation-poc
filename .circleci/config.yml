@@ -10,3 +10,5 @@ workflows:
       # "cypress" is the name of the imported orb
       # "run" is the name of the job defined in Cypress orb
       - cypress/run
+        parallel: true # split all specs across machines
+        parallelism: 1 # use 1 CircleCI machines to finish quickly
