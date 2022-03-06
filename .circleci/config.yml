@@ -11,26 +11,28 @@ jobs:
           TERM: xterm
     steps:
       - checkout
-      - run: pwd
-      - run: ls
       - restore_cache:
           keys:
             - 'v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}'
             - 'v2-deps-{{ .Branch }}-'
             - v2-deps-
-      - run: npm ci
+      - run: 
+          name: "Install Dependencies"
+          command: npm ci
       - save_cache:
           key: 'v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}'
           paths:
             - ~/.npm
             - ~/.cache
-      - run: npx cypress verify
+      - run:
+          name: "Verify Cypress Config"
+          command: npm run cy:verify
       - persist_to_workspace:
           root: ~/
           paths:
             - .cache
             - tmp
-  test1:
+  test1-chrome:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
@@ -39,16 +41,14 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
       - run:
           name: Running cypress tests 1
-          command: $(npm bin)/cypress run --spec cypress/integration/examples/actions.spec.js
+          command: $(npm bin)/cypress run --browser chrome --spec cypress/integration/examples/actions.spec.js
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-  test2:
+  test2-chrome:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
@@ -57,16 +57,14 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
       - run:
           name: Running cypress tests 2
-          command: $(npm bin)/cypress run --spec cypress/integration/examples/actions1.spec.js
+          command: $(npm bin)/cypress run --browser chrome --spec cypress/integration/examples/actions1.spec.js
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-  test3:
+  test3-firefox:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
@@ -75,16 +73,14 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
       - run:
           name: Running cypress tests 3
-          command: $(npm bin)/cypress run --spec cypress/integration/examples/actions2.spec.js
+          command: $(npm bin)/cypress run --browser firefox --spec cypress/integration/examples/actions2.spec.js
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-  test4:
+  test4-firefox:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
@@ -93,11 +89,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
       - run:
           name: Running cypress tests 4
-          command: $(npm bin)/cypress run --spec cypress/integration/examples/aliasing.spec.js
+          command: $(npm bin)/cypress run --browser chrome --spec cypress/integration/examples/aliasing.spec.js
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
@@ -108,26 +102,18 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test1:
+      - test1-chrome:
           requires:
             - build
-          name: test1-chrome
-          browser: chrome
-      - test2:
+      - test2-chrome:
           requires:
             - build
-          name: test2-firefox
-          browser: firefox
-      - test3:
+      - test3-firefox:
           requires:
             - build
-          name: test3-chrome
-          browser: chrome
-      - test4:
+      - test4-firefox:
           requires:
             - build
-          name: test4-firefox
-          browser: firefox
 
 
 
@@ -166,35 +152,4 @@ workflows:
 #           browser: firefox
 #           parallel: true
 #           parallelism: 3
-
-
-# version: 2
-# jobs:
-#   build:
-#     parallel: true
-#     parallelism: 3
-#     docker:
-#       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           keys:
-#             - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-#             - v1-deps-{{ .Branch }}
-#             - v1-deps
-#       - run:
-#           name: "Install Dependencies"
-#           command: npm ci
-#       - save_cache:
-#           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-#           # cache NPM modules and the folder with the Cypress binary
-#           paths:
-#             - ~/.npm
-#             - ~/.cache
-#       - run:
-#           name: "Verify Cypress Config"
-#           command: npm run cy:verify
-#       - run:
-#           name: "Run Cypress Test Scripts"
-#           command: npm run cy:run:chrome
-        
+       
