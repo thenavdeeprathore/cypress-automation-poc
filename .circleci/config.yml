@@ -9,14 +9,27 @@ executors:
 workflows:
   build:
     jobs:
+      - cypress/install
+          steps:
+            - checkout
+            - run:
+                name: "Install Dependencies"
+                command: npm ci
+            - run:
+                name: "Verify Cypress Config"
+                command: npm run cy:verify
       - cypress/run:
           name: Chrome
+          requires:
+            - cypress/install
           executor: linux_os
           browser: chrome
           parallel: true
           parallelism: 3
       - cypress/run:
           name: Firefox
+          requires:
+            - cypress/install
           executor: linux_os
           browser: firefox
           parallel: true
