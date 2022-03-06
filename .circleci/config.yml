@@ -5,12 +5,10 @@ executors:
   with-chrome:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+parallelism: 3
 workflows:
   build:
     jobs:
       - cypress/run:
           executor: with-chrome
           browser: chrome
-          parallel: true
-          parallelism: 3
-          
