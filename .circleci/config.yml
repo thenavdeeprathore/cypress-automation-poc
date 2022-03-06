@@ -6,7 +6,6 @@ executors:
   linux_os:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-parallelism: 2
 workflows:
   build:
     jobs:
