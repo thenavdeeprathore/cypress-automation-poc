@@ -1,44 +1,50 @@
 # ~/.circleci/config.yml
-version: 2
-# orbs:
-#   cypress: cypress-io/cypress@1
-# executors:
-#   with-chrome:
-#     docker:
-#       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-# parallelism: 3
-# workflows:
-#   build:
-#     jobs:
-#       - cypress/run:
-#           executor: with-chrome
-#           browser: chrome
-jobs:
-  build:
-    parallel: true
-    parallelism: 3
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
+executors:
+  linux_os:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-      - run:
-          name: "Install Dependencies"
-          command: npm ci
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          # cache NPM modules and the folder with the Cypress binary
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run:
-          name: "Verify Cypress Config"
-          command: npm run cy:verify
-      - run:
-          name: "Run Cypress Test Scripts"
-          command: npm run cy:run:chrome
+parallelism: 2
+workflows:
+  build:
+    jobs:
+      - cypress/run:
+          executor: linux_os
+          browser: chrome
+      - cypress/run:
+          executor: linux_os
+          browser: firefox
+
+
+# version: 2
+# jobs:
+#   build:
+#     parallel: true
+#     parallelism: 3
+#     docker:
+#       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+#     steps:
+#       - checkout
+#       - restore_cache:
+#           keys:
+#             - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+#             - v1-deps-{{ .Branch }}
+#             - v1-deps
+#       - run:
+#           name: "Install Dependencies"
+#           command: npm ci
+#       - save_cache:
+#           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+#           # cache NPM modules and the folder with the Cypress binary
+#           paths:
+#             - ~/.npm
+#             - ~/.cache
+#       - run:
+#           name: "Verify Cypress Config"
+#           command: npm run cy:verify
+#       - run:
+#           name: "Run Cypress Test Scripts"
+#           command: npm run cy:run:chrome
         
