@@ -111,15 +111,23 @@ workflows:
       - test1:
           requires:
             - build
+          name: test1-chrome
+          browser: chrome
       - test2:
           requires:
             - build
+          name: test2-firefox
+          browser: firefox
       - test3:
           requires:
             - build
+          name: test3-chrome
+          browser: chrome
       - test4:
           requires:
             - build
+          name: test4-firefox
+          browser: firefox
 
 
 
