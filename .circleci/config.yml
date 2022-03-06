@@ -4,11 +4,11 @@ orbs:
 executors:
   with-chrome:
     docker:
-      - image: 'cypress/browsers:node14.16.0-chrome90-ff88'
+      - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
 workflows:
   build:
     jobs:
       - cypress/run:
           executor: with-chrome
           browser: chrome
-          command: npm run cy:run:chrome
+          
