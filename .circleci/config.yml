@@ -18,3 +18,14 @@ jobs:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     parallelism: 3
+    steps:
+      - run:
+          name: "NPM Install"
+          command: npm ci
+      - run:
+          name: "Cypress Verify"
+          command: npx cypress verify
+      - run:
+          name: "Run scripts"
+          command: npm cypress run
+        
