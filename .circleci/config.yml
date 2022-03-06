@@ -38,5 +38,5 @@ jobs:
           command: npm run cy:verify
       - run:
           name: "Run Cypress Test Scripts"
-          command: npm run cy:run:firefox:headed
+          command: npm run cy:run:chrome
         
