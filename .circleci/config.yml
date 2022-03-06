@@ -19,6 +19,7 @@ jobs:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     parallelism: 3
     steps:
+      - checkout
       - run:
           name: "NPM Install"
           command: npm ci
