@@ -19,13 +19,24 @@ jobs:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
       - run:
-          name: "NPM Install"
+          name: "Install Dependencies"
           command: npm ci
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          # cache NPM modules and the folder with the Cypress binary
+          paths:
+            - ~/.npm
+            - ~/.cache
       - run:
-          name: "Cypress Verify"
+          name: "Verify Cypress Config"
           command: npm run cy:verify
       - run:
-          name: "Run scripts"
+          name: "Run Cypress Test Scripts"
           command: npm run cy:run:firefox:headed
         
