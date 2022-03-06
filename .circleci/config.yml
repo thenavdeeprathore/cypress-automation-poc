@@ -1,5 +1,5 @@
 # ~/.circleci/config.yml
-version: 2.1
+version: 2
 # orbs:
 #   cypress: cypress-io/cypress@1
 # executors:
@@ -14,7 +14,7 @@ version: 2.1
 #           executor: with-chrome
 #           browser: chrome
 jobs:
-  test:
+  build:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     parallelism: 3
