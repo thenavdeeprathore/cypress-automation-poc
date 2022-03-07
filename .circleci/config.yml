@@ -102,11 +102,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-          filters:
-            branches:
-              ignore: 
-                - develop
-                - /feature-.*/
       - test1-chrome:
           requires:
             - build
