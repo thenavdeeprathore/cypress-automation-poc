@@ -32,7 +32,7 @@ jobs:
           paths:
             - .cache
             - tmp
-  test1-chrome:
+  test1-chrome-latest:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
@@ -102,7 +102,7 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test1-chrome:
+      - test1-chrome-latest:
           requires:
             - build
           filters:
