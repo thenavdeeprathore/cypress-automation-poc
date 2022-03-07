@@ -102,6 +102,9 @@ workflows:
   build_and_test:
     jobs:
       - build
+          filters:
+            branches:
+              only: main
       - test1-chrome:
           requires:
             - build
