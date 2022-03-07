@@ -8,8 +8,8 @@ jobs:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     resource_class: small
-        environment:
-          TERM: xterm
+        # environment:
+        #   TERM: xterm
     steps:
       - checkout
       - restore_cache:
@@ -38,8 +38,8 @@ jobs:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     resource_class: small
-        environment:
-          TERM: xterm
+        # environment:
+        #   TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -55,8 +55,8 @@ jobs:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     resource_class: small
-        environment:
-          TERM: xterm
+        # environment:
+        #   TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -72,8 +72,8 @@ jobs:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     resource_class: small
-        environment:
-          TERM: xterm
+        # environment:
+        #   TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
@@ -89,8 +89,8 @@ jobs:
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
     resource_class: small
-        environment:
-          TERM: xterm
+        # environment:
+        #   TERM: xterm
     steps:
       - attach_workspace:
           at: ~/
