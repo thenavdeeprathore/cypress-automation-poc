@@ -104,19 +104,33 @@ workflows:
       - build
           filters:
             branches:
-              only: main
+              ignore: 
+                - develop
+                - /feature-.*/
       - test1-chrome:
           requires:
             - build
+          filters:
+            branches:
+              only: main
       - test2-chrome:
           requires:
             - build
+          filters:
+            branches:
+              only: main
       - test3-firefox:
           requires:
             - build
+          filters:
+            branches:
+              only: main
       - test4-firefox:
           requires:
             - build
+          filters:
+            branches:
+              only: main
 
 
 
