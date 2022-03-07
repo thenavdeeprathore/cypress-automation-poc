@@ -7,7 +7,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-        resource_class: small
+    resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -37,7 +37,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-        resource_class: small
+    resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -54,7 +54,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-        resource_class: small
+    resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -71,7 +71,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-        resource_class: small
+    resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -88,7 +88,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
-        resource_class: small
+    resource_class: small
         environment:
           TERM: xterm
     steps:
