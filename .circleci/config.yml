@@ -7,6 +7,7 @@ jobs:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+        resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -32,10 +33,11 @@ jobs:
           paths:
             - .cache
             - tmp
-  test1-chrome-latest:
+  test1:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+        resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -48,10 +50,11 @@ jobs:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-  test2-chrome:
+  test2:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+        resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -64,10 +67,11 @@ jobs:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-  test3-firefox:
+  test3:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+        resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -80,10 +84,11 @@ jobs:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
-  test4-firefox:
+  test4:
     working_directory: ~/tmp
     docker:
       - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+        resource_class: small
         environment:
           TERM: xterm
     steps:
@@ -102,25 +107,25 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test1-chrome-latest:
+      - test1:
           requires:
             - build
           filters:
             branches:
               only: main
-      - test2-chrome:
+      - test2:
           requires:
             - build
           filters:
             branches:
               only: main
-      - test3-firefox:
+      - test3:
           requires:
             - build
           filters:
             branches:
               only: main
-      - test4-firefox:
+      - test4:
           requires:
             - build
           filters:
