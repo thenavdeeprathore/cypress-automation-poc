@@ -101,6 +101,23 @@ jobs:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
+   test5-firefox:
+    working_directory: ~/tmp
+    docker:
+      - image: 'navdeeprathore/cypress-chrome-firefox-latest-versions'
+    resource_class: small
+        # environment:
+        #   TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running cypress tests 4
+          command: $(npm bin)/cypress run --browser firefox --spec cypress/integration/examples/aliasing.spec.js
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
 workflows:
   version: 2
@@ -126,6 +143,12 @@ workflows:
             branches:
               only: main
       - test4:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+      - test5-firefox:
           requires:
             - build
           filters:
